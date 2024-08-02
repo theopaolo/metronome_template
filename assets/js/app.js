@@ -1,21 +1,14 @@
 // Créer une application qui génère des haïkus aléatoires en combinant différentes phrases pré-enregistrées selon la structure traditionnelle 5-7-5.
 // Button qui relance la génération
-// Suivre les phrases déjà séléctionné
 // Afficher les phrases dans le DOM
+// Suivre les phrases déjà séléctionné
 
 // Variables
 
-
-// Choix aléatoire dans tableau
-function pickRandom(arr) {
-
-}
-
-// Générateur
-function generateHaiku(){
-
-}
-
+const line1 = document.querySelector('.line1');
+const line2 = document.querySelector('.line2');
+const line3 = document.querySelector('.line3');
+const btnGenerate = document.querySelector('.btn-gen');
 // Phrases 5 syllables
 
 let  fiveSyllables = [
@@ -66,4 +59,37 @@ let sevenSyllables = [
     "Les papillons dansent en été"
 ]
 
+let selectedLineFive = [];
+let selectedLineSeven = [];
+
+// Choix aléatoire dans tableau
+function pickRandom(array) {
+    chosenLine = array[Math.floor(Math.random() * array.length)];
+    const reduceArray = array.reduce();
+    selectedLineFive.push(chosenLine);
+    return chosenLine
+}
+
+// Générateur
+function generateHaiku(){
+    line1.innerHTML = pickRandom(fiveSyllables);
+    line2.innerHTML = pickRandom(sevenSyllables);
+    line3.innerHTML = pickRandom(fiveSyllables);
+}
+
+generateHaiku();
+
+// Btn qui génère un nouveau haiku
+btnGenerate.addEventListener('mouseup', generateHaiku)
+
 // SetInterval génération automatique
+
+async function getPhrase() {
+    try {
+        const response = await fetch(url);
+        let data = response.json();
+        console.log(data);
+    } catch(error) {
+        console.log(error);
+    }
+}
